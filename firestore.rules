@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Global Stats Counter
+    match /stats/{statId} {
+      allow read: if true;
+      allow create, update: if statId == 'global'
+        && incoming().totalPrayers is number && incoming().totalPrayers >= 0
+        && incoming().totalSurahsRead is number && incoming().totalSurahsRead >= 0
+        && incoming().uniqueSupporters is number && incoming().uniqueSupporters >= 0;
+    }
+
+    // Individual Dua Recitation Counters
+    match /dua_stats/{duaId} {
+      allow read, write: if true;
+    }
+
+    // Visitor Messages / Prayer Wall
+    match /messages/{messageId} {
+      allow read, write: if true;
+    }
+
+    // Participants tracking
+    match /participants/{participantId} {
+      allow read, write: if true;
+    }
+  }
+}

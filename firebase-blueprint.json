@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "GlobalStats": {
+      "title": "GlobalStats",
+      "description": "Aggregated counters for prayers, surah recitations, and supporters across all visitors",
+      "type": "object",
+      "properties": {
+        "totalPrayers": {
+          "type": "number",
+          "description": "Total number of prayers and tasbeeh recitations offered"
+        },
+        "totalSurahsRead": {
+          "type": "number",
+          "description": "Total count of completed Quran surah readings"
+        },
+        "uniqueSupporters": {
+          "type": "number",
+          "description": "Total count of unique participants who prayed"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["totalPrayers", "totalSurahsRead", "uniqueSupporters"]
+    },
+    "VisitorMessage": {
+      "title": "VisitorMessage",
+      "description": "A prayer or condolence message posted on the memorial prayer wall",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Name of the visitor or supporter"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Supplication or prayer text for the deceased"
+        },
+        "amenCount": {
+          "type": "number",
+          "description": "Number of Ameen confirmations by other visitors"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the prayer was submitted"
+        }
+      },
+      "required": ["name", "text", "amenCount", "createdAt"]
+    },
+    "DuaCounter": {
+      "title": "DuaCounter",
+      "description": "Recitation counter for individual supplications",
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Count of times this dua has been recited"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when this counter was updated"
+        }
+      },
+      "required": ["count"]
+    }
+  },
+  "firestore": {
+    "/stats/global": {
+      "schema": "GlobalStats",
+      "description": "Global memorial statistics counter document"
+    },
+    "/messages/{messageId}": {
+      "schema": "VisitorMessage",
+      "description": "Public prayer wall messages for the deceased"
+    },
+    "/dua_stats/{duaId}": {
+      "schema": "DuaCounter",
+      "description": "Individual counters for each prophetic dua"
+    }
+  }
+}

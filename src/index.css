@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --font-amiri: 'Amiri', serif;
+  --font-kufi: 'Reem Kufi', sans-serif;
+  --font-cairo: 'Cairo', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-cairo), system-ui, -apple-system, sans-serif;
+}
+
+.font-quran {
+  font-family: var(--font-amiri), serif;
+}
+
+.font-kufi {
+  font-family: var(--font-kufi), sans-serif;
+}
+
+.bg-islamic-pattern {
+  background-color: #042e22;
+  background-image: radial-gradient(#d9770626 1px, transparent 1px), radial-gradient(#0596691a 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+.bg-islamic-subtle {
+  background-color: #faf9f5;
+  background-image: radial-gradient(#0596690d 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.gold-glow {
+  box-shadow: 0 0 35px #d9770640;
+}
+
+.gold-glow-lg {
+  box-shadow: 0 0 50px #f59e0b59;
+}
+
+.emerald-glow {
+  box-shadow: 0 10px 30px -5px #042e224d;
+}
+
+@keyframes floatUpFade {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.95);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -35px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -75px) scale(1.1);
+  }
+}
+
+.animate-float-fade {
+  animation: floatUpFade 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1ede4;
+}
+::-webkit-scrollbar-thumb {
+  background: #043828;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #02241b;
+}
